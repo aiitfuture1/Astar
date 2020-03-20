@@ -48,8 +48,8 @@ def dp_planning(sx, sy, gx, gy, ox, oy, reso, rr):
 
     nstart = Node(round(sx // reso), round(sy // reso), 0.0, -1)
     ngoal = Node(round(gx // reso), round(gy // reso), 0.0, -1)
-    ox = [iox / reso for iox in ox]
-    oy = [ioy / reso for ioy in oy]
+    ox = [iox // reso for iox in ox]
+    oy = [ioy // reso for ioy in oy]
 
     obmap, minx, miny, maxx, maxy, xw, yw = calc_obstacle_map(ox, oy, reso, rr)
 
