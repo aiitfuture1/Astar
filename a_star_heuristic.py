@@ -46,8 +46,8 @@ def dp_planning(sx, sy, gx, gy, ox, oy, reso, rr):
     rr: robot radius[m]
     """
 
-    nstart = Node(round(sx / reso), round(sy / reso), 0.0, -1)
-    ngoal = Node(round(gx / reso), round(gy / reso), 0.0, -1)
+    nstart = Node(round(sx // reso), round(sy // reso), 0.0, -1)
+    ngoal = Node(round(gx // reso), round(gy // reso), 0.0, -1)
     ox = [iox / reso for iox in ox]
     oy = [ioy / reso for ioy in oy]
 
