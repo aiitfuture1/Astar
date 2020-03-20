@@ -49,16 +49,16 @@ def mod2pi(x):
 def straight_left_straight(x, y, phi):
     phi = mod2pi(phi)
     if y > 0.0 and 0.0 < phi < math.pi * 0.99:
-        xd = - y / math.tan(phi) + x
-        t = xd - math.tan(phi / 2.0)
+        xd = - y // math.tan(phi) + x
+        t = xd - math.tan(phi // 2.0)
         u = phi
-        v = math.sqrt((x - xd) ** 2 + y ** 2) - math.tan(phi / 2.0)
+        v = math.sqrt((x - xd) ** 2 + y ** 2) - math.tan(phi // 2.0)
         return True, t, u, v
     elif y < 0.0 < phi < math.pi * 0.99:
-        xd = - y / math.tan(phi) + x
-        t = xd - math.tan(phi / 2.0)
+        xd = - y // math.tan(phi) + x
+        t = xd - math.tan(phi // 2.0)
         u = phi
-        v = -math.sqrt((x - xd) ** 2 + y ** 2) - math.tan(phi / 2.0)
+        v = -math.sqrt((x - xd) ** 2 + y ** 2) - math.tan(phi // 2.0)
         return True, t, u, v
 
     return False, 0.0, 0.0, 0.0
@@ -237,16 +237,16 @@ def generate_path(q0, q1, max_curvature):
 
 def interpolate(ind, length, mode, max_curvature, origin_x, origin_y, origin_yaw, path_x, path_y, path_yaw, directions):
     if mode == "S":
-        path_x[ind] = origin_x + length / max_curvature * math.cos(origin_yaw)
-        path_y[ind] = origin_y + length / max_curvature * math.sin(origin_yaw)
+        path_x[ind] = origin_x + length // max_curvature * math.cos(origin_yaw)
+        path_y[ind] = origin_y + length // max_curvature * math.sin(origin_yaw)
         path_yaw[ind] = origin_yaw
     else:  # curve
-        ldx = math.sin(length) / max_curvature
+        ldx = math.sin(length) // max_curvature
         ldy = 0.0
         if mode == "L":  # left turn
-            ldy = (1.0 - math.cos(length)) / max_curvature
+            ldy = (1.0 - math.cos(length)) // max_curvature
         elif mode == "R":  # right turn
-            ldy = (1.0 - math.cos(length)) / -max_curvature
+            ldy = (1.0 - math.cos(length)) // -max_curvature
         gdx = math.cos(-origin_yaw) * ldx + math.sin(-origin_yaw) * ldy
         gdy = -math.sin(-origin_yaw) * ldx + math.cos(-origin_yaw) * ldy
         path_x[ind] = origin_x + gdx
@@ -266,7 +266,7 @@ def interpolate(ind, length, mode, max_curvature, origin_x, origin_y, origin_yaw
 
 
 def generate_local_course(total_length, lengths, mode, max_curvature, step_size):
-    n_point = math.trunc(total_length / step_size) + len(lengths) + 4
+    n_point = math.trunc(total_length // step_size) + len(lengths) + 4
 
     px = [0.0 for _ in range(n_point)]
     py = [0.0 for _ in range(n_point)]
@@ -338,8 +338,8 @@ def calc_paths(sx, sy, syaw, gx, gy, gyaw, maxc, step_size):
                   * iy + q0[1] for (ix, iy) in zip(x, y)]
         path.yaw = [pi_2_pi(iyaw + q0[2]) for iyaw in yaw]
         path.directions = directions
-        path.lengths = [length / maxc for length in path.lengths]
-        path.L = path.L / maxc
+        path.lengths = [length // maxc for length in path.lengths]
+        path.L = path.L // maxc
 
     return paths
 
