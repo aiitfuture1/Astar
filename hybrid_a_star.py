@@ -111,16 +111,16 @@ class Config:
         ox.append(max_x_m)
         oy.append(max_y_m)
 
-        self.minx = round(min_x_m / xyreso)
-        self.miny = round(min_y_m / xyreso)
-        self.maxx = round(max_x_m / xyreso)
-        self.maxy = round(max_y_m / xyreso)
+        self.minx = round(min_x_m // xyreso)
+        self.miny = round(min_y_m // xyreso)
+        self.maxx = round(max_x_m // xyreso)
+        self.maxy = round(max_y_m // xyreso)
 
         self.xw = round(self.maxx - self.minx)
         self.yw = round(self.maxy - self.miny)
 
-        self.minyaw = round(- math.pi / yawreso) - 1
-        self.maxyaw = round(math.pi / yawreso)
+        self.minyaw = round(- math.pi // yawreso) - 1
+        self.maxyaw = round(math.pi // yawreso)
         self.yaww = round(self.maxyaw - self.minyaw)
 
 
@@ -155,9 +155,9 @@ def calc_next_node(current, steer, direction, config, ox, oy, kdtree):
         return None
 
     d = direction == 1
-    xind = round(x / XY_GRID_RESOLUTION)
-    yind = round(y / XY_GRID_RESOLUTION)
-    yawind = round(yaw / YAW_GRID_RESOLUTION)
+    xind = round(x // XY_GRID_RESOLUTION)
+    yind = round(y // XY_GRID_RESOLUTION)
+    yawind = round(yaw // YAW_GRID_RESOLUTION)
 
     addedcost = 0.0
 
@@ -196,7 +196,7 @@ def analytic_expantion(current, goal, c, ox, oy, kdtree):
     gy = goal.ylist[-1]
     gyaw = goal.yawlist[-1]
 
-    max_curvature = math.tan(MAX_STEER) / WB
+    max_curvature = math.tan(MAX_STEER) // WB
     paths = rs.calc_paths(sx, sy, syaw, gx, gy, gyaw,
                           max_curvature, step_size=MOTION_RESOLUTION)
 
@@ -293,9 +293,9 @@ def hybrid_a_star_planning(start, goal, ox, oy, xyreso, yawreso):
 
     config = Config(tox, toy, xyreso, yawreso)
 
-    nstart = Node(round(start[0] / xyreso), round(start[1] / xyreso), round(start[2] / yawreso),
+    nstart = Node(round(start[0] // xyreso), round(start[1] // xyreso), round(start[2] // yawreso),
                   True, [start[0]], [start[1]], [start[2]], [True], cost=0)
-    ngoal = Node(round(goal[0] / xyreso), round(goal[1] / xyreso), round(goal[2] / yawreso),
+    ngoal = Node(round(goal[0] // xyreso), round(goal[1] // xyreso), round(goal[2] // yawreso),
                  True, [goal[0]], [goal[1]], [goal[2]], [True])
 
     openList, closedList = {}, {}
