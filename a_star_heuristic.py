@@ -154,7 +154,7 @@ def calc_obstacle_map(ox, oy, reso, vr):
             #  print(x, y)
             for iox, ioy in zip(ox, oy):
                 d = math.sqrt((iox - x)**2 + (ioy - y)**2)
-                if d <= vr / reso:
+                if d <= vr // reso:
                     obmap[ix][iy] = True
                     break
 
