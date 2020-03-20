@@ -10,9 +10,9 @@ import math
 import matplotlib.pyplot as plt
 import sys
 
-from a_star_heuristic import dp_planning  # , calc_obstacle_map
-import ReedsSheppPath.reeds_shepp_path_planning as rs
-from car import move, check_car_collision, MAX_STEER, WB, plot_car
+from Astar.a_star_heuristic import dp_planning  # , calc_obstacle_map
+import Astar.ReedsSheppPath.reeds_shepp_path_planning as rs
+from Astar.car import move, check_car_collision, MAX_STEER, WB, plot_car
 
 
 
