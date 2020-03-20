@@ -13,12 +13,12 @@ LF = 3.3  # distance from rear to vehicle front end
 LB = 1.0  # distance from rear to vehicle back end
 MAX_STEER = 0.6  # [rad] maximum steering angle
 
-WBUBBLE_DIST = (LF - LB) // 2.0
-WBUBBLE_R = sqrt(((LF + LB) // 2.0)**2 + 1)
+WBUBBLE_DIST = (LF - LB) / 2.0
+WBUBBLE_R = sqrt(((LF + LB) / 2.0)**2 + 1)
 
 # vehicle rectangle verticles
 VRX = [LF, LF, -LB, -LB, LF]
-VRY = [W // 2, -W // 2, -W // 2, W // 2, W // 2]
+VRY = [W / 2, -W / 2, -W / 2, W / 2, W / 2]
 
 
 def check_car_collision(xlist, ylist, yawlist, ox, oy, kdtree):
@@ -47,7 +47,7 @@ def rectangle_check(x, y, yaw, ox, oy):
         rx = c * tx - s * ty
         ry = s * tx + c * ty
 
-        if not (rx > LF or rx < -LB or ry > W // 2.0 or ry < -W // 2.0):
+        if not (rx > LF or rx < -LB or ry > W / 2.0 or ry < -W / 2.0):
             return False  # no collision
 
     return True  # collision
@@ -88,7 +88,7 @@ def pi_2_pi(angle):
 def move(x, y, yaw, distance, steer, L=WB):
     x += distance * cos(yaw)
     y += distance * sin(yaw)
-    yaw += pi_2_pi(distance * tan(steer) // L)  # distance/2
+    yaw += pi_2_pi(distance * tan(steer) / L)  # distance/2
 
     return x, y, yaw
 
