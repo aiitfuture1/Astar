@@ -46,10 +46,10 @@ def dp_planning(sx, sy, gx, gy, ox, oy, reso, rr):
     rr: robot radius[m]
     """
 
-    nstart = Node(round(sx // reso), round(sy // reso), 0.0, -1)
-    ngoal = Node(round(gx // reso), round(gy // reso), 0.0, -1)
-    ox = [iox // reso for iox in ox]
-    oy = [ioy // reso for ioy in oy]
+    nstart = Node(round(sx / reso), round(sy / reso), 0.0, -1)
+    ngoal = Node(round(gx / reso), round(gy / reso), 0.0, -1)
+    ox = [iox / reso for iox in ox]
+    oy = [ioy / reso for ioy in oy]
 
     obmap, minx, miny, maxx, maxy, xw, yw = calc_obstacle_map(ox, oy, reso, rr)
 
@@ -154,7 +154,7 @@ def calc_obstacle_map(ox, oy, reso, vr):
             #  print(x, y)
             for iox, ioy in zip(ox, oy):
                 d = math.sqrt((iox - x)**2 + (ioy - y)**2)
-                if d <= vr // reso:
+                if d <= vr / reso:
                     obmap[ix][iy] = True
                     break
 
